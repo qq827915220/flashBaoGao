@@ -49,7 +49,7 @@
 
 <script>
 import { getTemplates } from "@/api/api";
-import MyCustom from "./canvas/MyCustom"
+import MyCustom from "./canvas/MyCustom";
 import types from "@/store/mutation-types";
 export default {
     name: 'MySideBar',

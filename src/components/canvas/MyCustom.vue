@@ -38,10 +38,13 @@ export default {
     },
     methods: {
         init(){
-            console.log(this.Custom);
+            
         },
         success(){
             console.log('上传成功');
+            this.$store.commit(types.SET_ISCUSTOM, {
+                isCustom:false
+            });
         },
         cancel(){
             this.$store.commit(types.SET_ISCUSTOM, {

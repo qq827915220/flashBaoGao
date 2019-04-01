@@ -1,26 +1,23 @@
 <template v-if="del_box">
-    <div class="my-grid" @click="selectGrid" @mousedown="selectGrid" v-if="close" @dblclick="dblClick" :style="gridStyle" ref="img">
+    <div class="my-grid" @click="selectGrid" @mousedown="selectGrid" @dblclick="dblClick" :style="gridStyle" ref="img">
         <img class="img" :src="gridData.photo.big" :style="imgStyle" @mousedown="imgMouseDown($event)" alt="img">
-        <div class="icon">
-            <Icon size="18" color="#fff" type="ios-close" />
+        <div class="icon" @click="closeDom()" v-if="selected === idx">
+            <Icon size="36" color="#fff" type="ios-close" />
         </div>
-        <div class="close" @click="closeDom()" v-if="selected === idx">删除</div>
         <span class="ctrl-line line-n" @mousedown="start($event,'resizeUp')"></span>
         <span class="ctrl-line line-e" @mousedown="start($event,'resizeRight')"></span>
         <span class="ctrl-line line-s" @mousedown="start($event,'resizeDown')"></span>
         <span class="ctrl-line line-w" @mousedown="start($event,'resizeLeft')"></span>
-        <!-- @setcustom="setcustom" -->
-        <MyCustom :Custom="Custom" @closeCus="closeCus" ></MyCustom>
     </div>
 </template>
 
 <script>
 import { genEmptyGridData } from "@/utils/constants";
-import MyCustom from "./MyCustom"
+import types from "@/store/mutation-types";
 export default {
     name: "MyGrid",
     props: {
-        grids:Array,
+        grids: Array,
         grid: Object,
         idx: Number,
         selected: Number,
@@ -60,13 +57,10 @@ export default {
             dragable: false,
             draging: false,
             origin: '',
-            del_box:true,
-            close:true,
-            Custom: false
+            del_box: true
         }
     },
     components: {
-        MyCustom
     },
     mounted () {
         this.gridData.width = this.grid.width || 100;
@@ -78,13 +72,9 @@ export default {
         this.initImg();
     },
     methods: {
-        closeCus (val) {
-            this.Custom = val;
-        },
-        closeDom(){
-            this.close = false;
+        closeDom () {
             //删除父组件dom数据
-            this.grids.splice(this.selected,1); 
+            this.grids.splice(this.selected, 1);
         },
         initImg () {
             var img = new Image();
@@ -148,7 +138,10 @@ export default {
         },
         // 双击格子, 上传本地图
         dblClick () {
-            this.Custom=!this.Custom;
+            this.$store.commit(types.SET_ISCUSTOM, {
+                isCustom: true
+            });
+            // this.Custom=!this.Custom;
             // this.$bus.$emit('dblClickGrid')
         },
         // ------------- 格子大小控制 start -----------------
@@ -215,8 +208,8 @@ export default {
             this.eX = e.clientX;
             this.eY = e.clientY;
             this.origin = {
-                top:this.$refs.img.offsetTop,
-                left:this.$refs.img.offsetLeft,
+                top: this.$refs.img.offsetTop,
+                left: this.$refs.img.offsetLeft,
                 width: this.$refs.img.clientWidth,
                 height: this.$refs.img.clientHeight
             };
@@ -234,7 +227,7 @@ export default {
             window.getSelection
                 ? window.getSelection().removeAllRanges()
                 : document.selection.empty();
-            
+
         },
         // ------------- 格子大小控制 end -----------------
     }
@@ -244,14 +237,21 @@ export default {
 <style scoped lang="scss">
 .my-grid {
     border: 2px solid #ccc;
-    background-color: #fff; 
+    background-color: #fff;
     box-sizing: border-box;
     position: absolute;
     overflow: hidden;
-    .close{
+    .icon {
+        cursor: pointer;
         position: absolute;
-        top:0;
-        right: 0;
+        border-radius: 50%;
+        background-color: red;
+        top: 5px;
+        right: 5px;
+        height: 36px;
+        i {
+            margin-top: -24px;
+        }
     }
     .img {
         position: absolute;
@@ -286,9 +286,7 @@ export default {
             cursor: w-resize;
         }
     }
-    
 }
-
 
 .ctrl-layer {
     position: absolute;

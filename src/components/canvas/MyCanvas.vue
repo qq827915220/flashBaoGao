@@ -7,9 +7,11 @@
                 <div class="drag-layer" v-show="canvas.dragable" @mousedown="canvasMouseDown($event)"></div>
             </div>
             <div class="" v-for="(add, index) in addImg" :style="'position: absolute;width:'+add._width+'px;height:'+add._height+'px;top:'+add._top+'px;left:'+add._left+'px;'">
-                <img draggable="false" style="width:100%;height:100%" :id="'img_'+add._id" :src='add._src' />
+                <img draggable="false" style="width:100%;height:100%" :id="'img_'+add._id" :src='add._src'/>
+                <!-- v-show="isMongolia" -->
+                <div  class="Mongolia" @mousedown="imgMouseDown($event,add._id)"></div>
             </div>
-            <div v-show="isdrop.isdrop" style="width:100%;height:100%;position: absolute;top: 0;left: 0;"></div>
+            <div v-show="isdrop.isdrop" class="Mongolia"></div>
         </div>
 
         <!-- 有格子被选中时才显示 -->
@@ -116,12 +118,9 @@ export default {
             curGrid: genEmptyGridData(), // 当前选中的格子信息
             showImgInfoModal: false, // 显示编辑图片信息Modal
             gridPhotoInfo: {}, // 编辑格子中图片信息
-            addImg: [],
-            addImgId: 0
+            addImg: [],    //本地图片上传信息
+            addImgId: -1,   //本地图片ID
         }
-    },
-    computed: {
-
     },
     computed: {
         workbench () {
@@ -175,11 +174,6 @@ export default {
         setTimeout(() => {
             this.init()
         }, 300);
-        /* this.$watch("addImg", function () {
-            document.getElementById('img_' + this.addImgId).onmousedown = function (e) {
-                e.preventDefault()
-            };
-        }) */
     },
     methods: {
         drop (e) {
@@ -195,8 +189,6 @@ export default {
             this.$store.commit(types.SET_ISDROP, {
                 isdrop:false
             });
-            console.log(this.isdrop);
-            console.log(e);
         },
         init () {
             // canvas 初始化完毕
@@ -266,8 +258,10 @@ export default {
             this.curGrid.photo.rotationX = parseInt(tmp) === 180 ? 0 : 180;
         },
         setImgUpload () {
-
-            this.$Message.success('上传本地图功能待实现');
+            this.$store.commit(types.SET_ISCUSTOM, {
+                isCustom:true
+            });
+            // this.$Message.success('上传本地图功能待实现');
         },
         // 打开设置图片信息面板
         setImgInfo () {
@@ -371,6 +365,44 @@ export default {
                 this.canvas.dragging = false;
             };
         },
+        // 为浮层添加拖动事件
+        imgMouseDown (e1,id) {
+           // 当前元素
+            const ele = e1.target;
+            // 暂存鼠标按下时当前元素的x
+            let startX = parseInt(this.addImg[id]._left) || 0;
+            // 暂存鼠标按下时当前元素的y
+            let startY = parseInt(this.addImg[id]._top) || 0;
+            // 鼠标按下事件
+            let oEvent1 = e1 || event;
+            // 鼠标按下时x
+            let posX1 = oEvent1.clientX;
+            // 鼠标按下时y
+            let posY1 = oEvent1.clientY;
+            // 标记图片处于拖动状态
+            /* this.isMongolia = true; */
+            var _this=this;
+            ele.onmousemove = (e2) => {
+                // 鼠标移动事件
+                let oEvent2 = e2 || event;
+                // 鼠标当前移动到的位置x
+                let posX2 = oEvent2.clientX;
+                // 鼠标当前移动到的位置y
+                let posY2 = oEvent2.clientY;
+                // 设置图片的位置跟随鼠标
+                _this.addImg[id]._left = startX + (posX2 - posX1) / _this.canvas.scale;
+                _this.addImg[id]._top = startY + (posY2 - posY1) / _this.canvas.scale;
+            };
+
+            // 移除鼠标移动和鼠标抬起监听
+            document.onmouseup = () => {
+                ele.onmousemove = null;
+                ele.onmouseup = null;
+                // 标记图片处于非拖动状态
+                /* this.isMongolia = false; */
+            };
+            e1.preventDefault()
+        },
         onSubmitPage () {
             let gridsData = [];
             for (let i = 0; i < this.grids.length; i++) {
@@ -442,5 +474,8 @@ export default {
             }
         }
     }
+}
+.Mongolia{
+width:100%;height:100%;position: absolute;top: 0;left: 0;
 }
 </style>
