@@ -6,6 +6,7 @@
         <Layout>
             <MyHeader></MyHeader>
             <MyContent ref="mainContainer"></MyContent>
+            <MyFooter></MyFooter>
         </Layout>
     </Layout>
 </template>
@@ -14,6 +15,7 @@
 import MySideBar from './MySideBar'
 import MyContent from './MyContent'
 import MyHeader from './MyHeader'
+import MyFooter from './MyFooter'
 import MyCanvas from './canvas/MyCanvas'
 import types from "@/store/mutation-types";
 
@@ -25,7 +27,8 @@ export default {
         MySideBar,
         MyHeader,
         MyContent,
-        MyCanvas
+        MyCanvas,
+        MyFooter
     },
     data () {
         return {
