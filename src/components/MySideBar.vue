@@ -8,7 +8,7 @@
                 选择模板
                 <Row slot="content">
                     <Col span="8" v-for="(tpl, index) in templates" :key="index">
-                    <img :src="tpl.thumb" alt="模板图" width="65" height="65" @click="chooseTpl(tpl)">
+                        <img v-lazyload="tpl.thumb" alt="模板图" width="65" height="65" @click="chooseTpl(tpl)">
                     </Col>
                 </Row>
             </Panel>

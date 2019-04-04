@@ -5,10 +5,12 @@ import store from './store'
 import './mock'
 import 'iview/dist/styles/iview.css'
 import bus from './components/eventBus'
+import LazyLoad from './utils//lazyLoad'
 
 Vue.config.productionTip = false;
 
 Vue.use(iView);
+Vue.use(LazyLoad);
 Vue.prototype.$bus = bus;
 
 new Vue({
