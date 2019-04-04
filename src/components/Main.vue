@@ -73,6 +73,7 @@ $main-bg: #fff;
 $aside-width: 240px;
 
 #app {
+    min-width: 768px;
     height: 100%;
     #main {
         height: 100%;

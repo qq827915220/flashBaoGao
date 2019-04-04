@@ -3,7 +3,7 @@
         <div class="logo-area">
             <span>报告编辑 <sub>v180806.01</sub></span>
         </div>
-        <Collapse v-model="expanded">
+        <Collapse accordion v-model="expanded">
             <Panel name="1" class="tpl-select">
                 选择模板
                 <Row slot="content">
@@ -311,7 +311,6 @@ $header-height: 48px;
 .tpl-select {
     .ivu-collapse-content {
         padding: 0 6px;
-        height: 480px;
         overflow: auto;
         text-align: center;
     }

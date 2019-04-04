@@ -21,25 +21,25 @@
         <Tabs type="card">
           <TabPane label="图片库">
             <div class="select-box">
-              <Button type="primary">筛选条件</Button>
-              <Page :total="100" show-total show-elevator style="float:right" />
-              <div class="card-box">
-                <Card>
-                  <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
-                </Card>
-                <Card>
-                  <p slot="title">No border title</p>
-                  <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
-                </Card>
-                <Card>
-                  <p slot="title">No border title</p>
-                  <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
-                </Card>
-                <Card>
-                  <p slot="title">No border title</p>
-                  <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
-                </Card>
-              </div>
+              <Button type="primary" class="select-btn">筛选条件</Button>
+              <Page :total="100" show-total show-elevator />
+            </div>
+            <div class="card-box">
+              <Card>
+                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              </Card>
+              <Card>
+                <p slot="title">No border title</p>
+                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              </Card>
+              <Card>
+                <p slot="title">No border title</p>
+                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              </Card>
+              <Card>
+                <p slot="title">No border title</p>
+                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              </Card>
             </div>
           </TabPane>
           <TabPane label="选中的图片">选中的图片</TabPane>
@@ -86,7 +86,7 @@
         color: #999;
         text-align: center;
         cursor: pointer;
-        border: 1px dashed #ccc;
+        border: 1px dashed #dcdee2;
         i {
           margin-top: 85px;
         }
@@ -102,25 +102,39 @@
       top: 0;
       .ivu-modal-content {
         height: 100%;
+        .ivu-modal-body {
+          padding-bottom: 0;
+        }
       }
     }
     .select-box {
-      padding: 10px 10px 0;
+      padding: 10px;
       border-radius: 5px;
-      border: 1px solid #ccc;
-      .card-box {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 10px;
-        margin-left: -10px;
-        height: 52vh;
-        overflow-y: scroll;
-        .ivu-card {
-          width: 205px;
-          height: 260px;
-          margin-left: 10px;
-          margin-bottom: 10px;
+      border: 1px solid #dcdee2;
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      line-height: 35px;
+      .select-btn {
+        height: 35px;
+        margin-right: 10px;
+      }
+    }
+    .card-box {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      margin-left: -10px;
+      height: 52vh;
+      overflow-y: scroll;
+      .ivu-card {
+        width: 205px;
+        height: 260px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        &:hover {
+          border: 1px solid #2d8cf0;
         }
       }
     }
