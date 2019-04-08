@@ -25,20 +25,32 @@
               <Page :total="100" show-total show-elevator />
             </div>
             <div class="card-box">
-              <Card>
-                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              <Card :padding="4">
+                <div class="top">
+                  <img src="http://101.132.178.141/img-loading.png" alt="">
+                </div>
+                <div class="bottom">
+                  <div class="left">单品：<span title="test">testtesttesttesttesttest</span></div>
+                  <div class="right">品名：<span title="test">testtesttesttesttesttest</span></div>
+                </div>
               </Card>
-              <Card>
-                <p slot="title">No border title</p>
-                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              <Card :padding="4">
+                <div class="top">
+                  <img src="http://101.132.178.141/img-loading.png" alt="">
+                </div>
+                <div class="bottom">
+                  <div class="left">单品：<span title="test">testtesttesttesttesttest</span></div>
+                  <div class="right">品名：<span title="test">testtesttesttesttesttest</span></div>
+                </div>
               </Card>
-              <Card>
-                <p slot="title">No border title</p>
-                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
-              </Card>
-              <Card>
-                <p slot="title">No border title</p>
-                <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+              <Card :padding="4">
+                <div class="top">
+                  <img src="http://101.132.178.141/img-loading.png" alt="">
+                </div>
+                <div class="bottom">
+                  <div class="left">单品：<span title="test">testtesttesttesttesttest</span></div>
+                  <div class="right">品名：<span title="test">testtesttesttesttesttest</span></div>
+                </div>
               </Card>
             </div>
           </TabPane>
@@ -129,12 +141,34 @@
       height: 52vh;
       overflow-y: scroll;
       .ivu-card {
-        width: 205px;
+        width: 250px;
         height: 260px;
         margin-left: 10px;
         margin-bottom: 10px;
+        position: relative;
         &:hover {
           border: 1px solid #2d8cf0;
+        }
+        .top {
+          text-align: center;
+          img {
+            height: 200px;
+          }
+        }
+        .bottom {
+          display: flex;
+          text-align: center;
+          width: 100%;
+          height: 50px;
+          padding: 15px 0;
+          div {
+            width: 50%;
+            max-width: 140px;
+            padding: 0 15px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
         }
       }
     }
