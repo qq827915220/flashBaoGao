@@ -90,7 +90,7 @@ export default {
             img.src = this.gridData.photo.big;
         },
         // 选中格子
-        selectGrid (e) {
+        selectGrid () {
             this.$emit('selectGrid', this.idx, this.gridData);
             this.dragable = true;
         },
@@ -202,7 +202,7 @@ export default {
             this.gridData.width = this.origin.width + disX;
         },
         start (e, direction) {
-            let origin = this.$refs.img.getBoundingClientRect();
+            // let origin = this.$refs.img.getBoundingClientRect();
             // this.validArea.right = this.posInfo.left + this.posInfo.width;
             // this.validArea.bottom = this.posInfo.top + this.posInfo.height;
             this.eX = e.clientX;

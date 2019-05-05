@@ -6,7 +6,7 @@
                 </MyGrid>
                 <div class="drag-layer" v-show="canvas.dragable" @mousedown="canvasMouseDown($event)"></div>
             </div>
-            <div class="" v-for="(add, index) in addImg" :style="'position: absolute;width:'+add._width+'px;height:'+add._height+'px;top:'+add._top+'px;left:'+add._left+'px;'">
+            <div class="" v-for="(add, index) in addImg" :key="index" :style="'position: absolute;width:'+add._width+'px;height:'+add._height+'px;top:'+add._top+'px;left:'+add._left+'px;'">
                 <img draggable="false" style="width:100%;height:100%" :id="'img_'+add._id" :src='add._src'/>
                 <!-- v-show="isMongolia" -->
                 <div  class="Mongolia" @mousedown="imgMouseDown($event,add._id)"></div>

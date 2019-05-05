@@ -46,11 +46,11 @@ export default {
         this.$nextTick(() => {
             this.getMainContainerSize()
         });
-        this.$Notice.open({
-            title: '待完成功能',
-            desc: this.todo.join('<br>'),
-            duration: 0
-        });
+        // this.$Notice.open({
+        //     title: '待完成功能',
+        //     desc: this.todo.join('<br>'),
+        //     duration: 0
+        // });
     },
     methods: {
         onWindowResize () {
