@@ -1104,7 +1104,7 @@
 
 <style lang="scss">
   #footer {
-    padding: 0;
+    padding: 10px 0 0;
     &>button {
       margin-left: 10px;
     }
@@ -1129,6 +1129,7 @@
           overflow-x: scroll;
           &>div {
             min-width: 160px;
+            width: 160px;
             height: 100%;
             margin-right: 10px;
             border: 1px solid #dcdee2;

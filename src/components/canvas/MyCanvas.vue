@@ -6,11 +6,11 @@
                 </MyGrid>
                 <div class="drag-layer" v-show="canvas.dragable" @mousedown="canvasMouseDown($event)"></div>
             </div>
-            <div class="" v-for="(add, index) in addImg" :key="index" :style="'position: absolute;width:'+add._width+'px;height:'+add._height+'px;top:'+add._top+'px;left:'+add._left+'px;'">
+            <!-- <div class="" v-for="(add, index) in addImg" :key="index" :style="'position: absolute;width:'+add._width+'px;height:'+add._height+'px;top:'+add._top+'px;left:'+add._left+'px;'">
                 <img draggable="false" style="width:100%;height:100%" :id="'img_'+add._id" :src='add._src'/>
-                <!-- v-show="isMongolia" -->
-                <div  class="Mongolia" @mousedown="imgMouseDown($event,add._id)"></div>
-            </div>
+                <div  class="Mongolia" @click="selectAddImg(add, index)" @mousedown="imgMouseDown($event,add._id)"></div>
+            </div> -->
+            <MyAddGrid v-for="(add, index) in addImg" :key="index"></MyAddGrid>
             <div v-show="isdrop.isdrop" class="Mongolia"></div>
         </div>
 
@@ -84,6 +84,7 @@
 
 <script>
 import MyGrid from './MyGrid'
+import MyAddGrid from './MyAddGrid'
 import { genEmptyGridData, genEmptyPhotoData } from "@/utils/constants";
 import types from "@/store/mutation-types";
 
@@ -91,7 +92,8 @@ export default {
     name: 'MyCanvas',
     props: {},
     components: {
-        MyGrid
+        MyGrid,
+        MyAddGrid
     },
     data () {
         return {
@@ -364,6 +366,10 @@ export default {
                 // 标记canvas处于非拖动状态
                 this.canvas.dragging = false;
             };
+        },
+        selectAddImg (row, index) {
+          console.log(row, index)
+          this.curGridIndex = -1;
         },
         // 为浮层添加拖动事件
         imgMouseDown (e1,id) {
